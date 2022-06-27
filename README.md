@@ -11,7 +11,8 @@ LegalFiles endpoints.
 ## Repository Layout
 
 - [server.js](server.js) - app entrypoint
-- [babel.config.json] - Babel config for JS enhancemens and compatability
+- [babel.config.json](babel.config.json) - Babel config for JS enhancemens and
+  compatability
 - [.prettierrc.yaml](.prettierrc.yaml) - Prettier config for code
   auto-formatting.
 - [.eslintrc.json](.eslintrc.json) - Eslint config for code quality and linting.
