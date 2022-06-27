@@ -2,9 +2,10 @@
   "name": "legal-files-integration",
   "version": "0.0.1",
   "description": "A project that links the Community Services \"Yukon.ca\" Drupal webforms front-end",
-  "main": "main.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon main.js"
+    "start": "nodemon --config nodemon.config.json ./server.js",
+    "build": "rm -rf dist && rollup --config ./rollup.config.js"
   },
   "repository": {
     "type": "git",
@@ -24,10 +25,13 @@
     "@babel/eslint-parser": "^7.18.2",
     "@babel/node": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
+    "@rollup/plugin-babel": "^5.3.1",
+    "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.1.0",
     "nodemon": "^2.0.18",
-    "prettier": "2.7.1"
+    "prettier": "2.7.1",
+    "rollup": "^2.75.7"
   }
 }
