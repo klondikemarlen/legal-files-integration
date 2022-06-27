@@ -1,0 +1,9 @@
+embeddedLanguageFormatting: "auto"
+semi: false
+singleAttributePerLine: true
+singleQuote: false
+tabWidth: 2
+trailingComma: "es5"
+useTabs: true
+printWidth: 80
+proseWrap: "always"

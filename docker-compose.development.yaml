@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: development.Dockerfile
+    env_file:
+      - ./.env.development
+    environment:
+      NODE_ENV: development
+    tty: true
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/src/app
