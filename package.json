@@ -4,7 +4,7 @@
   "description": "A project that links the Community Services \"Yukon.ca\" Drupal webforms front-end",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --config nodemon.config.json ./server.js",
+    "start": "nodemon --config ./nodemon.config.json ./server.js",
     "build": "rm -rf dist && rollup --config ./rollup.config.js"
   },
   "repository": {
