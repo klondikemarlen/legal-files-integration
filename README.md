@@ -19,7 +19,7 @@ LegalFiles endpoints.
 1. To develop the app, clone the repository to a local folder via
 
 ```bash
-git clone git@github.com:klondikemarlen/community-services-forms-microservice.git
+git clone git@github.com:klondikemarlen/legal-files-integration.git
 ```
 
 > Assumes that you are running on a system that supports bash
@@ -35,8 +35,8 @@ git clone git@github.com:klondikemarlen/community-services-forms-microservice.gi
 > If you choose not to install Ruby you can replace the `dev` command below with
 > `docker compose -f docker-compose.development.yaml`
 
-4. (optional) Install [direnv](https://direnv.net/) and make a basic `.envrc`
-   file inside the `community-services-forms-microservice` directory like so:
+4. (optional) Install [direnv](https://direnv.net/) then change to the
+   `legal-files-integration` directory and make a basic `.envrc` file like so:
 
 ```bash
 #!/usr/bin/env bash
