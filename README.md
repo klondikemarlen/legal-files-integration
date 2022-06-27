@@ -10,11 +10,24 @@ LegalFiles endpoints.
 
 ## Repository Layout
 
-- docker-compose.development.yaml - development configuration
-- docker-compose.production.yaml - production configuration
+### Production
+
+- [docker-compose.yaml](docker-compose.yaml) - production Docker Compose
+  configuration
+- [Dockerfile](Dockerfile) - production Dockerfile
+- /dist/server-bundle.js - production server bundle, only available in container
+  after production build.
+- /.env - production environment config, _never_ commit this file.
+
+### Development
+
+- [docker-compose.development.yaml](docker-compose.development.yaml) -
+  development Docker Compose configuration
+- [development.Dockerfile](development.Dockerfile) - development Dockerfile
+- /.env.development - development environment config, _never_ commit this file.
 - src/ - folder containing Express server source code
 
-## Development
+## Development Setup
 
 1. To develop the app, clone the repository to a local folder via
 
@@ -54,3 +67,8 @@ Then run `direnv allow`
 
 6. Boot the app via `dev up`, wait for it to boot, and then go to the
    [Express app](http://localhost:3000/).
+
+## Production Deployment
+
+1. Build the app via `docker compose build`.
+2. Deploy the build app via `docker compose up`
