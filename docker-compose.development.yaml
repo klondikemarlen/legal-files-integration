@@ -12,3 +12,15 @@ services:
       - '3000:3000'
     volumes:
       - .:/usr/src/app
+  test:
+    build:
+      context: .
+      dockerfile: development.Dockerfile
+    command: /bin/true
+    env_file:
+      - ./.env.development
+    environment:
+      NODE_ENV: test
+    tty: true
+    volumes:
+      - .:/usr/src/app

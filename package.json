@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon --config ./nodemon.config.json ./server.js",
-    "build": "rm -rf dist && rollup --config ./rollup.config.js"
+    "build": "rm -rf dist && rollup --config ./rollup.config.js",
+    "test": "mocha --config ./.mocharc.js 'tests/**/*.test.js'"
   },
   "repository": {
     "type": "git",
@@ -21,15 +22,19 @@
     "express": "^4.18.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.5",
+    "@babel/core": "^7.18.6",
     "@babel/eslint-parser": "^7.18.2",
     "@babel/node": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
+    "@babel/register": "^7.18.6",
     "@rollup/plugin-babel": "^5.3.1",
     "babel-plugin-module-resolver": "^4.1.0",
+    "bdd-lazy-var": "^2.6.1",
+    "chai": "^4.3.6",
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.1.0",
+    "mocha": "^10.0.0",
     "nodemon": "^2.0.18",
     "prettier": "2.7.1",
     "rollup": "^2.75.7"
