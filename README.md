@@ -10,11 +10,19 @@ LegalFiles endpoints.
 
 ## Repository Layout
 
+- [server.js](server.js) - app entrypoint
+- [babel.config.json] - Babel config for JS enhancemens and compatability
+- [.prettierrc.yaml](.prettierrc.yaml) - Prettier config for code
+  auto-formatting.
+- [.eslintrc.json](.eslintrc.json) - Eslint config for code quality and linting.
+- [src/](src/) - folder containing Express server source code
+
 ### Production
 
 - [docker-compose.yaml](docker-compose.yaml) - production Docker Compose
   configuration
 - [Dockerfile](Dockerfile) - production Dockerfile
+- [rollup.config.js] - production bundler config
 - /dist/server-bundle.js - production server bundle, only available in container
   after production build.
 - /.env - production environment config, _never_ commit this file.
@@ -25,7 +33,16 @@ LegalFiles endpoints.
   development Docker Compose configuration
 - [development.Dockerfile](development.Dockerfile) - development Dockerfile
 - /.env.development - development environment config, _never_ commit this file.
-- src/ - folder containing Express server source code
+- [nodemon.config.json](nodemon.config.json) - Nodemon config for developement
+  code reloading.
+
+#### Test
+
+- [.mocharc.js](.mocharc.js) - mocha configuration file
+- [tests/test-setup.js](tests/test-setup.js) - test setup file, loads Chai and
+  various other test
+- [tests/](tests/) - test folder, test files must follow the format
+  `tests/**/*.test.js` plugins
 
 ## Development Setup
 
@@ -67,6 +84,13 @@ Then run `direnv allow`
 
 6. Boot the app via `dev up`, wait for it to boot, and then go to the
    [Express app](http://localhost:3000/).
+
+### Testing
+
+1. Build the development setup via `dev build` or
+   `docker compose -f docker-compose.development.yaml build`
+2. Run the test environment via `dev mocha` or `dev test` or
+   `docker compose -f docker-compose.development.yaml run --rm test npm run test`
 
 ## Production Deployment
 
