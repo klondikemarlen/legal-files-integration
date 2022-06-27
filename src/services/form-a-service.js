@@ -1,14 +1,14 @@
 import ApplicationService from "@/services/application-service"
 
 export default class FormAService extends ApplicationService {
-	#paramA
+	#formData
 
-	constructor(paramA) {
-		super(paramA)
-		this.paramA = paramA
+	constructor(formData) {
+		super(formData)
+		this.formData = formData
 	}
 
 	perform() {
-		return `transformed the form using paramters: ${this.paramA}`
+		return `transformed the form data: ${JSON.stringify(this.formData)}`
 	}
 }

@@ -1,7 +1,8 @@
 import FormAService from "@/services/form-a-service"
 
-export function create(req, res) {
-	return FormAService.perform("paramA")
+export function postInjestForm(req, res) {
+	const formData = req.body
+	return FormAService.perform(formData)
 		.then((data) => {
 			return res.json(data)
 		})
@@ -13,5 +14,5 @@ export function create(req, res) {
 }
 
 export default {
-	create,
+	postInjestForm,
 }

@@ -7,6 +7,6 @@ const router = Router()
 router.get("/", (req, res) => {
 	res.send("Legal Files Integration API.")
 })
-router.route("/form-a").post(formAController.create)
+router.route("/form-a").post(formAController.postInjestForm)
 
 export default router
