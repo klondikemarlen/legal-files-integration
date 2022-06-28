@@ -1,10 +1,10 @@
-import http from "@/api/http-client"
+import applicationApi from "@/api/application-api"
 
 const formAUrl = "/api/form-a"
 
 export default {
 	create(attributes) {
-		return http
+		return applicationApi
 			.post(formAUrl, { formA: attributes })
 			.then((response) => response.data)
 	},
