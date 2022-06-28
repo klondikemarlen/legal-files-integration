@@ -20,7 +20,7 @@ LegalFiles endpoints.
 - [src/api](src/api/) - code for talking to the LegalFiles API.
 - [src/controllers](src/controllers/) - code to receive Drupal form data and
   pass it off to a service. Controllers should limit themselves to calling
-  services and return a response to the Drupal form.
+  services and returning a response to the Drupal form.
 - [src/services](src/services/) - code to transform Drupal form data and call
   API functions. Services should be thoroughly tested as the bulk of the
   application logic occurs in them.
@@ -96,7 +96,7 @@ Then run `direnv allow`
    take a while.
 
 7. Boot the app via `dev up`, wait for it to boot, and then go to the
-   [Express app](http://localhost:3000/).
+   [http://localhost:3000/](http://localhost:3000/).
 
 ### Testing
 
