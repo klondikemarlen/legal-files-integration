@@ -16,7 +16,14 @@ LegalFiles endpoints.
 - [.prettierrc.yaml](.prettierrc.yaml) - Prettier config for code
   auto-formatting.
 - [.eslintrc.json](.eslintrc.json) - Eslint config for code quality and linting.
-- [src/](src/) - folder containing Express server source code
+- [src/](src/) - Express server source code
+- [src/api](src/api/) - code for talking to the LegalFiles API.
+- [src/controllers](src/controllers/) - code to receive Drupal form data and
+  pass it off to a service. Controllers should limit themselves to calling
+  services and return a response to the Drupal form.
+- [src/services](src/services/) - code to transform Drupal form data and call
+  API functions. Services should be thoroughly tested as the bulk of the
+  application logic occurs in them.
 
 ### Production
 
