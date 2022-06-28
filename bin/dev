@@ -73,7 +73,7 @@ class DevHelper
     db_host = ENV.fetch('DB_HOST', 'localhost')
     db_user = ENV.fetch('DB_USER', 'sa')
     db_pass = ENV.fetch('DB_PASS', '1m5ecure!')
-    db_name = ENV.fetch('DB_NAME', 'LegalFiles')
+    db_name = ENV.fetch('DB_NAME', 'legal_files')
     compose(
       *%w[exec db /opt/mssql-tools/bin/sqlcmd],
       *%W[-U #{db_user}],

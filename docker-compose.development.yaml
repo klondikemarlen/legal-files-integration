@@ -10,7 +10,7 @@ services:
       DB_HOST: "localhost"
       DB_USER: "sa"
       DB_PASS: "1m5ecure!"
-      DB_NAME: "LegalFiles"
+      DB_NAME: "legal_files"
     tty: true
     ports:
       - "3000:3000"
@@ -24,8 +24,11 @@ services:
       SA_PASSWORD: "1m5ecure!"
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Express"
+    tty: true
     ports:
       - "1433:1433"
+    volumes:
+      - db_data:/var/opt/mssql
   test:
     build:
       context: .
@@ -42,3 +45,6 @@ services:
     tty: true
     volumes:
       - .:/usr/src/app
+
+volumes:
+  db_data:
