@@ -9,10 +9,6 @@ describe("FormAController", () => {
 	def("FormAServiceMock", () => td.replace(FormAService, "default"))
 	def("formData", () => ({ foo: "bar" }))
 
-	afterEach(() => {
-		td.reset()
-	})
-
 	describe("#postInjestForm", () => {
 		context("when injesting a form", () => {
 			context("when dependent service succeeds", () => {

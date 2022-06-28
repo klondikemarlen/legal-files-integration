@@ -1,5 +1,5 @@
 module.exports = {
-  require: ["@babel/register", "./tests/test-setup.js"],
+  require: ["@babel/register", "./tests/test-setup.js", "./tests/hooks.js"],
   // reporter: "dot",
   watch: true,
   watchFiles: ["."],
