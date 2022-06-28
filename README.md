@@ -46,6 +46,7 @@ LegalFiles endpoints.
 - /.env.development - development environment config, _never_ commit this file.
 - [nodemon.config.json](nodemon.config.json) - Nodemon config for developement
   code reloading.
+- [.sequelizerc](.sequelizerc) - customize sequelize-cli options
 
 #### Test
 
@@ -97,6 +98,25 @@ Then run `direnv allow`
 
 7. Boot the app via `dev up`, wait for it to boot, and then go to the
    [http://localhost:3000/](http://localhost:3000/).
+
+### Migrations
+
+Using Sequelize, see https://sequelize.org/docs/v6/other-topics/migrations/
+
+Inside container the "app" container.
+
+1. `npx sequelize-cli db:create`
+2. `npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string`
+3. `npx sequelize-cli db:migrate`
+
+To undo a migration:
+
+- `npx sequelize-cli db:migrate:undo`
+
+To create and run seeds:
+
+- `npx sequelize-cli seed:generate --name demo-user`
+- `npx sequelize-cli db:seed:all`
 
 ### Testing
 

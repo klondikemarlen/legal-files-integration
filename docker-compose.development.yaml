@@ -7,10 +7,10 @@ services:
       - ./.env.development
     environment:
       NODE_ENV: development
-      DB_HOST: "localhost"
+      DB_HOST: "db" # must match the service name
       DB_USER: "sa"
-      DB_PASS: "1m5ecure!"
-      DB_NAME: "legal_files"
+      DB_PASSWORD: "1m5ecure!"
+      DB_NAME: "legal_files_development"
     tty: true
     ports:
       - "3000:3000"
@@ -38,10 +38,10 @@ services:
       - ./.env.development
     environment:
       NODE_ENV: test
-      DB_HOST: "localhost"
+      DB_HOST: "db" # must match the service name
       DB_USER: "sa"
-      DB_PASS: "1m5ecure!"
-      DB_NAME: "LegalFilesTest"
+      DB_PASSWORD: "1m5ecure!"
+      DB_NAME: "legal_files_test"
     tty: true
     volumes:
       - .:/usr/src/app
