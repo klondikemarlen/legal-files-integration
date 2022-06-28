@@ -20,7 +20,9 @@
   "homepage": "https://github.com/klondikemarlen/legal-files-integration#readme",
   "dependencies": {
     "axios": "^0.27.2",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "sequelize": "^6.21.2",
+    "tedious": "^14.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
@@ -41,6 +43,7 @@
     "prettier": "2.7.1",
     "reqresnext": "^1.7.0",
     "rollup": "^2.75.7",
+    "sequelize-cli": "^6.4.1",
     "testdouble": "^3.16.6",
     "testdouble-chai": "^0.5.0"
   }
