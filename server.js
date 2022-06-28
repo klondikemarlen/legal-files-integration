@@ -1,8 +1,7 @@
 import app from "@/app"
 
-const port = process.env.PORT || 3000
-const host = process.env.HOST || "localhost"
+const bootMessageUrl = process.env.BOOT_MESSAGE_URL || "http://localhost:3000"
 
-app.listen(port, () => {
-	console.log(`API listening at http://${host}:${port}`)
+app.listen(3000, () => {
+	console.log(`API listening at ${bootMessageUrl}`)
 })
