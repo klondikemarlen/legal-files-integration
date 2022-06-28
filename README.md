@@ -24,6 +24,9 @@ LegalFiles endpoints.
 - [src/services](src/services/) - code to transform Drupal form data and call
   API functions. Services should be thoroughly tested as the bulk of the
   application logic occurs in them.
+- [src/app.js](src/app.js) - core app logic
+- [src/routes.js](src/routes.js) - routes that accept form data. Routes are
+  mapped to controller methods.
 
 ### Production
 
