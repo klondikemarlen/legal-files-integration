@@ -69,6 +69,23 @@ class DevHelper
     run(*%w[app npm], *args, **kwargs)
   end
 
+  def sqlcmd(*args, **kwargs) # rubocop:disable Metrics/MethodLength
+    db_host = ENV.fetch('DB_HOST', 'localhost')
+    db_user = ENV.fetch('DB_USER', 'sa')
+    db_pass = ENV.fetch('DB_PASS', '1m5ecure!')
+    db_name = ENV.fetch('DB_NAME', 'LegalFiles')
+    compose(
+      *%w[exec db /opt/mssql-tools/bin/sqlcmd],
+      *%W[-U #{db_user}],
+      *%W[-P #{db_pass}],
+      *%W[-H #{db_host}],
+      *%W[-d #{db_name}],
+      '-I', # enable quoted identifiers, e.g. "table"."column"
+      *args,
+      **kwargs
+    )
+  end
+
   def bash_completions
     completions = public_methods(false).reject do |word|
       %i[call].include?(word)
