@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/klondikemarlen/legal-files-integration#readme",
   "dependencies": {
+    "axios": "^0.27.2",
     "express": "^4.18.1"
   },
   "devDependencies": {
