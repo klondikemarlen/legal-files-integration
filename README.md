@@ -90,10 +90,12 @@ Then run `direnv allow`
 > If you choose not to install `direnv`, you can replace `dev` in the following
 > commands with `bin/dev`
 
-5. Build the app via `dev build`; depending on your internet speed, this may
+5. Create a `.env.development` file in the top-level project directory from the
+   `env.template` file.
+6. Build the app via `dev build`; depending on your internet speed, this may
    take a while.
 
-6. Boot the app via `dev up`, wait for it to boot, and then go to the
+7. Boot the app via `dev up`, wait for it to boot, and then go to the
    [Express app](http://localhost:3000/).
 
 ### Testing
@@ -105,5 +107,7 @@ Then run `direnv allow`
 
 ## Production Deployment
 
+5. Create a `.env` file in the top-level project directory from the
+   `env.template` file.
 1. Build the app via `docker compose build`.
-2. Deploy the build app via `docker compose up`
+1. Deploy the build app via `docker compose up`
