@@ -109,7 +109,11 @@ class DevHelper
 
   def compose_command(*args, **kwargs)
     environment = kwargs.fetch(:environment, 'development')
-    "docker compose -f docker-compose.#{environment}.yaml #{args.join(' ')}"
+    "cd #{app_root} && docker compose -f docker-compose.#{environment}.yaml #{args.join(' ')}"
+  end
+
+  def app_root
+    @app_root ||= File.absolute_path("#{__dir__}/..")
   end
 end
 
