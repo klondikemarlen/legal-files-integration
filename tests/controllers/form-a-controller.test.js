@@ -4,6 +4,8 @@ import FormAController from "@/controllers/form-a-controller"
 import * as FormAService from "@/services/form-a-service"
 
 describe("FormAController", () => {
+	subject("controller", () => FormAController)
+
 	def("FormAServiceMock", () => td.replace(FormAService, "default"))
 	def("formData", () => ({ foo: "bar" }))
 
@@ -23,7 +25,7 @@ describe("FormAController", () => {
 						body: $formData,
 					})
 
-					return FormAController.postInjestForm(req, res).then(() => {
+					return $controller.postInjestForm(req, res).then(() => {
 						return expect(res.statusCode).to.eq(200)
 					})
 				})
@@ -41,7 +43,7 @@ describe("FormAController", () => {
 						body: $formData,
 					})
 
-					return FormAController.postInjestForm(req, res).then(() => {
+					return $controller.postInjestForm(req, res).then(() => {
 						return expect(res.statusCode).to.eq(422)
 					})
 				})
