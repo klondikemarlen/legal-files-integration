@@ -23,7 +23,7 @@ LegalFiles endpoints.
 - [docker-compose.yaml](docker-compose.yaml) - production Docker Compose
   configuration
 - [Dockerfile](Dockerfile) - production Dockerfile
-- [rollup.config.js] - production bundler config
+- [rollup.config.js](rollup.config.js) - production bundler config
 - /dist/server-bundle.js - production server bundle, only available in container
   after production build.
 - /.env - production environment config, _never_ commit this file.
