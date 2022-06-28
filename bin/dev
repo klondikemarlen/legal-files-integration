@@ -86,6 +86,10 @@ class DevHelper
     )
   end
 
+  def db(*args, **kwargs)
+    compose(*%w[exec db], *args, **kwargs)
+  end
+
   def bash_completions
     completions = public_methods(false).reject do |word|
       %i[call].include?(word)
