@@ -5,8 +5,10 @@ to a database operated by a company called LegalFiles.
 
 The project is a Node/Express server running in Docker Compose. It has an
 endpoint to accept data from a Drupal form. This calls a controller that
-performs some data transforms, then sends the transformed data to the various
-LegalFiles endpoints.
+performs some data transforms, then sends the transformed data to the LegalFiles
+database. See the
+[Legal Files Integration Design](https://docs.google.com/document/d/1O40PVvLg3mR5D4rOay5NqxiXw3o1OdjrwO-JDWRD0oE)
+document.
 
 ## Repository Layout
 
