@@ -34,16 +34,16 @@ LegalFiles endpoints.
   configuration
 - [Dockerfile](Dockerfile) - production Dockerfile
 - [rollup.config.js](rollup.config.js) - production bundler config
-- /dist/server-bundle.js - production server bundle, only available in container
+- dist/server-bundle.js - production server bundle, only available in container
   after production build.
-- /.env - production environment config, _never_ commit this file.
+- .env - production environment config, _never_ commit this file.
 
 ### Development
 
 - [docker-compose.development.yaml](docker-compose.development.yaml) -
   development Docker Compose configuration
 - [development.Dockerfile](development.Dockerfile) - development Dockerfile
-- /.env.development - development environment config, _never_ commit this file.
+- .env.development - development environment config, _never_ commit this file.
 - [nodemon.config.json](nodemon.config.json) - Nodemon config for developement
   code reloading.
 - [.sequelizerc](.sequelizerc) - customize sequelize-cli options
