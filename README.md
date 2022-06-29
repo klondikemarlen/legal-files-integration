@@ -127,6 +127,18 @@ To create and run seeds:
 2. Run the test environment via `dev mocha` or `dev test` or
    `docker compose -f docker-compose.development.yaml run --rm test npm run test`
 
+### Production Image Testing
+
+1. Spin up an example production database using
+   `docker run --rm -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=1m5ecure!" -p 1433:1433 mcr.microsoft.com/mssql/server:2022-latest`
+
+   > Note that the password must match the DB_PASSWORD in the `.env` file.
+
+2. Build production build using `docker compose build`.
+3. Start the production server using `docker compose up`
+
+> Debug the built image via `docker compose run --rm app bash`
+
 ## Production Deployment
 
 5. Create a `.env` file in the top-level project directory from the
