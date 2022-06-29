@@ -12,6 +12,7 @@ module.exports = {
 		database: process.env.DB_NAME,
 		host: process.env.DB_HOST,
 		dialect: "mssql",
+		logging: false, // Disables logging
 	},
 	production: {
 		username: process.env.DB_USER,
