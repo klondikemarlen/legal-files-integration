@@ -12,3 +12,9 @@ chai.use(chaiAsPromised) // install last to promisify other plugins
 global.expect = chai.expect
 global.td = td
 // global.faker = faker;
+
+// Load all test helpers
+const helpers = require("./helpers")
+Object.entries(helpers).forEach(([key, value]) => {
+	global[key] = value
+})
