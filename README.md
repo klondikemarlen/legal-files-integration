@@ -18,6 +18,7 @@ document.
 - [.prettierrc.yaml](.prettierrc.yaml) - Prettier config for code
   auto-formatting.
 - [.eslintrc.json](.eslintrc.json) - Eslint config for code quality and linting.
+- [.sequelizerc](.sequelizerc) - Sequelize config file for migrations and seeds
 - [src/](src/) - Express server source code
 - [src/api](src/api/) - code for talking to the LegalFiles API.
 - [src/controllers](src/controllers/) - code to receive Drupal form data and
@@ -29,6 +30,7 @@ document.
 - [src/app.js](src/app.js) - core app logic
 - [src/routes.js](src/routes.js) - routes that accept form data. Routes are
   mapped to controller methods.
+- [src/db/config.js](src/db/config.js) - Config file for database connections.
 
 ### Production
 
