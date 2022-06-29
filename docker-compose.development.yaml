@@ -5,11 +5,11 @@ services:
       dockerfile: development.Dockerfile
     env_file:
       - ./.env.development
-    environment:
+    environment: &environment-definition
       NODE_ENV: development
       DB_HOST: "db" # must match the service name
       DB_USER: "sa"
-      DB_PASSWORD: "1m5ecure!"
+      DB_PASSWORD: &password-definition "1m5ecure!"
       DB_NAME: "legal_files_development"
     tty: true
     ports:
@@ -18,17 +18,6 @@ services:
       - .:/usr/src/app
     depends_on:
       - db
-  db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    environment:
-      SA_PASSWORD: "1m5ecure!"
-      ACCEPT_EULA: "Y"
-      MSSQL_PID: "Express"
-    tty: true
-    ports:
-      - "1433:1433"
-    volumes:
-      - db_data:/var/opt/mssql
   test:
     build:
       context: .
@@ -37,14 +26,23 @@ services:
     env_file:
       - ./.env.development
     environment:
+      <<: *environment-definition
       NODE_ENV: test
-      DB_HOST: "db" # must match the service name
-      DB_USER: "sa"
-      DB_PASSWORD: "1m5ecure!"
       DB_NAME: "legal_files_test"
     tty: true
     volumes:
       - .:/usr/src/app
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: *password-definition
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+    tty: true
+    ports:
+      - "1433:1433"
+    volumes:
+      - db_data:/var/opt/mssql
 
 volumes:
   db_data:
