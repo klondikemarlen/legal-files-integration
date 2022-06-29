@@ -17,7 +17,8 @@ services:
     volumes:
       - .:/usr/src/app
     depends_on:
-      - db
+      db:
+        condition: service_healthy
   test:
     build:
       context: .
@@ -32,6 +33,9 @@ services:
     tty: true
     volumes:
       - .:/usr/src/app
+    depends_on:
+      db:
+        condition: service_healthy
   db:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
@@ -43,6 +47,12 @@ services:
       - "1433:1433"
     volumes:
       - db_data:/var/opt/mssql
+    healthcheck: # https://github.com/Microsoft/mssql-docker/issues/133
+      test: "/opt/mssql-tools/bin/sqlcmd -U sa -P \"$$SA_PASSWORD\" -Q \"SELECT 1\" || exit 1"
+      interval: 5s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
 
 volumes:
   db_data:
