@@ -9,3 +9,6 @@ services:
       NODE_ENV: production
     ports:
       - '3000:3000'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+      - 'host.docker.internal:172.17.0.1'

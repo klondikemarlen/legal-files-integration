@@ -69,6 +69,27 @@ class DevHelper
     run(*%w[app npm], *args, **kwargs)
   end
 
+  def sqlcmd(*args, **kwargs) # rubocop:disable Metrics/MethodLength
+    db_host = ENV.fetch('DB_HOST', 'localhost')
+    db_user = ENV.fetch('DB_USER', 'sa')
+    db_pass = ENV.fetch('DB_PASS', '1m5ecure!')
+    db_name = ENV.fetch('DB_NAME', 'legal_files')
+    compose(
+      *%w[exec db /opt/mssql-tools/bin/sqlcmd],
+      *%W[-U #{db_user}],
+      *%W[-P #{db_pass}],
+      *%W[-H #{db_host}],
+      *%W[-d #{db_name}],
+      '-I', # enable quoted identifiers, e.g. "table"."column"
+      *args,
+      **kwargs
+    )
+  end
+
+  def db(*args, **kwargs)
+    compose(*%w[exec db], *args, **kwargs)
+  end
+
   def bash_completions
     completions = public_methods(false).reject do |word|
       %i[call].include?(word)
@@ -88,7 +109,11 @@ class DevHelper
 
   def compose_command(*args, **kwargs)
     environment = kwargs.fetch(:environment, 'development')
-    "docker compose -f docker-compose.#{environment}.yaml #{args.join(' ')}"
+    "cd #{app_root} && docker compose -f docker-compose.#{environment}.yaml #{args.join(' ')}"
+  end
+
+  def app_root
+    @app_root ||= File.absolute_path("#{__dir__}/..")
   end
 end
 

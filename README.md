@@ -5,8 +5,10 @@ to a database operated by a company called LegalFiles.
 
 The project is a Node/Express server running in Docker Compose. It has an
 endpoint to accept data from a Drupal form. This calls a controller that
-performs some data transforms, then sends the transformed data to the various
-LegalFiles endpoints.
+performs some data transforms, then sends the transformed data to the LegalFiles
+database. See the
+[Legal Files Integration Design](https://docs.google.com/document/d/1O40PVvLg3mR5D4rOay5NqxiXw3o1OdjrwO-JDWRD0oE)
+document.
 
 ## Repository Layout
 
@@ -16,6 +18,7 @@ LegalFiles endpoints.
 - [.prettierrc.yaml](.prettierrc.yaml) - Prettier config for code
   auto-formatting.
 - [.eslintrc.json](.eslintrc.json) - Eslint config for code quality and linting.
+- [.sequelizerc](.sequelizerc) - Sequelize config file for migrations and seeds
 - [src/](src/) - Express server source code
 - [src/api](src/api/) - code for talking to the LegalFiles API.
 - [src/controllers](src/controllers/) - code to receive Drupal form data and
@@ -27,6 +30,7 @@ LegalFiles endpoints.
 - [src/app.js](src/app.js) - core app logic
 - [src/routes.js](src/routes.js) - routes that accept form data. Routes are
   mapped to controller methods.
+- [src/db/config.js](src/db/config.js) - Config file for database connections.
 
 ### Production
 
@@ -34,18 +38,19 @@ LegalFiles endpoints.
   configuration
 - [Dockerfile](Dockerfile) - production Dockerfile
 - [rollup.config.js](rollup.config.js) - production bundler config
-- /dist/server-bundle.js - production server bundle, only available in container
+- dist/server-bundle.js - production server bundle, only available in container
   after production build.
-- /.env - production environment config, _never_ commit this file.
+- .env - production environment config, _never_ commit this file.
 
 ### Development
 
 - [docker-compose.development.yaml](docker-compose.development.yaml) -
   development Docker Compose configuration
 - [development.Dockerfile](development.Dockerfile) - development Dockerfile
-- /.env.development - development environment config, _never_ commit this file.
+- .env.development - development environment config, _never_ commit this file.
 - [nodemon.config.json](nodemon.config.json) - Nodemon config for developement
   code reloading.
+- [.sequelizerc](.sequelizerc) - customize sequelize-cli options
 
 #### Test
 
@@ -98,12 +103,43 @@ Then run `direnv allow`
 7. Boot the app via `dev up`, wait for it to boot, and then go to the
    [http://localhost:3000/](http://localhost:3000/).
 
+### Migrations
+
+Using Sequelize, see https://sequelize.org/docs/v6/other-topics/migrations/
+
+Inside container the "app" container.
+
+1. `npx sequelize-cli db:create`
+2. `npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string`
+3. `npx sequelize-cli db:migrate`
+
+To undo a migration:
+
+- `npx sequelize-cli db:migrate:undo`
+
+To create and run seeds:
+
+- `npx sequelize-cli seed:generate --name demo-user`
+- `npx sequelize-cli db:seed:all`
+
 ### Testing
 
 1. Build the development setup via `dev build` or
    `docker compose -f docker-compose.development.yaml build`
 2. Run the test environment via `dev mocha` or `dev test` or
    `docker compose -f docker-compose.development.yaml run --rm test npm run test`
+
+### Production Image Testing
+
+1. Spin up an example production database using
+   `docker run --rm -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=1m5ecure!" -p 1433:1433 mcr.microsoft.com/mssql/server:2022-latest`
+
+   > Note that the password must match the DB_PASSWORD in the `.env` file.
+
+2. Build production build using `docker compose build`.
+3. Start the production server using `docker compose up`
+
+> Debug the built image via `docker compose run --rm app bash`
 
 ## Production Deployment
 

@@ -1,6 +1,5 @@
 import ApplicationService from "@/services/application-service"
-
-import formAApi from "@/api/form-a-api"
+import db from "@/models"
 
 export default class FormAService extends ApplicationService {
 	#formData
@@ -10,16 +9,19 @@ export default class FormAService extends ApplicationService {
 		this.formData = formData
 	}
 
-	// data transforms here for easier testing
-	transform() {
-		return this.formData
+	perform() {
+		return this.#createFormSubmission().then((formA) => {
+			return this.#buildResponse(formA)
+		})
 	}
 
-	perform() {
-		return formAApi.create(this.transform()).then((data) => {
-			return `Sent transformed form data: ${JSON.stringify(
-				this.formData
-			)}, response was ${JSON.stringify(data)}`
-		})
+	// private methods
+
+	#createFormSubmission() {
+		return db.FormA.create({ firstName: this.formData.firstName })
+	}
+
+	#buildResponse() {
+		return { success: true }
 	}
 }

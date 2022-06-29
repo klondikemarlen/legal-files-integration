@@ -1,24 +1,26 @@
 import FormAService from "@/services/form-a-service"
-
-import * as formAApi from "@/api/form-a-api"
+import db from "@/models"
 
 describe("FormApiService", () => {
-	def("formAApi", () => td.replace(formAApi, "default"))
+	describe("#perform", () => {
+		context("when passed some form data", () => {
+			def("data", () => ({
+				firstName: "Marlen",
+			}))
 
-	context("when called", () => {
-		def("data", () => ({
-			foo: "bar",
-		}))
+			it("success stores the data in the database", () => {
+				return FormAService.perform($data).then((data) => {
+					expect(data).to.eql({ success: true })
+				})
+			})
 
-		def("apiSuccessResponse", () => ({ success: true }))
-
-		beforeEach(() => {
-			td.when($formAApi.create($data)).thenResolve($apiSuccessResponse)
-		})
-
-		it("propagates the data to the formAApi", () => {
-			return FormAService.perform($data).then((data) => {
-				expect(data).to.include("success")
+			it("error stores the data in the database", () => {
+				expect(() => FormAService.perform($data)).to.alter(
+					() => db.FormA.count(),
+					{
+						by: 1,
+					}
+				)
 			})
 		})
 	})
