@@ -8,12 +8,12 @@ describe("RentalAndTenancyDisputeSubmissionsService", () => {
 				loadTestData("rental-and-tenacy-submissions/submission-1.json")
 			)
 
-			it("stores the raw submission", () => {
-				expect(() =>
-					RentalAndTenancyDisputeSubmissionsService.perform($data)
-				).to.alter(() => db.Submission.count(), {
-					by: 1,
-				})
+			it("stores the raw submission", async () => {
+				expect(await db.Submission.count()).to.equal(0)
+
+				await RentalAndTenancyDisputeSubmissionsService.perform($data)
+				expect(await db.Submission.count()).to.equal(1)
+			})
 			})
 		})
 	})
