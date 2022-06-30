@@ -13,7 +13,7 @@ export default class RentalAndTenancySubmissionsService extends ApplicationServi
 	// private methods
 
 	#saveRawSubmission(rawSubmission) {
-		return rawSubmission
+		return db.Submission.create({ rawSubmission })
 	}
 
 	#transformFormSubmission(rawSubmission) {

@@ -11,7 +11,7 @@ describe("RentalAndTenancySubmissionsService", () => {
 			it("stores the raw submission", () => {
 				expect(() =>
 					RentalAndTenancySubmissionsService.perform($data)
-				).to.alter(() => db.Submissions.count(), {
+				).to.alter(() => db.Submission.count(), {
 					by: 1,
 				})
 			})
