@@ -4,6 +4,10 @@ const databaseOptions = {
 	database: process.env.DB_NAME,
 	host: process.env.DB_HOST,
 	dialect: "mssql",
+	migrationStorage: "sequelize",
+	migrationStorageTableName: "sequelize_migrations",
+	seederStorage: "sequelize",
+	seederStorageTableName: "sequelize_seeders",
 }
 
 const modelOptions = {
