@@ -34,7 +34,7 @@ export default class RentalAndTenancyDisputeSubmissionsService extends Applicati
 		return db.RentalAndTenancyDisputeSubmission.create({ ...modelData })
 	}
 
-	#buildResponse(parsedSubmission) {
-		return { data: parsedSubmission.toJSON() }
+	#buildResponse() {
+		return { success: true }
 	}
 }
