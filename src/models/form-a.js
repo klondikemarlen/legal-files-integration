@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		{
 			sequelize,
-			modelName: "FormA",
 			tableName: "form_as",
 		}
 	)

@@ -8,15 +8,15 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			rawSubmission: {
+			raw_submission: {
 				type: Sequelize.TEXT,
 				allowNull: false,
 			},
-			createdAt: {
+			created_at: {
 				allowNull: false,
 				type: Sequelize.DATE,
 			},
-			updatedAt: {
+			updated_at: {
 				allowNull: false,
 				type: Sequelize.DATE,
 			},

@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		{
 			sequelize,
-			modelName: "Submission",
 			tableName: "submissions",
 		}
 	)
