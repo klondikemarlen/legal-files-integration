@@ -2,23 +2,16 @@ import ApplicationService from "@/services/application-service"
 import db from "@/models"
 
 export default class FormAService extends ApplicationService {
-	#formData
-
-	constructor(formData) {
-		super(formData)
-		this.formData = formData
-	}
-
 	perform() {
-		return this.#createFormSubmission().then((formA) => {
-			return this.#buildResponse(formA)
-		})
+		return Promise.resolve(this.rawSubmission)
+			.then(this.#createFormSubmission)
+			.then(this.#buildResponse)
 	}
 
 	// private methods
 
-	#createFormSubmission() {
-		return db.FormA.create({ firstName: this.formData.firstName })
+	#createFormSubmission(modelAttributes) {
+		return db.FormA.create({ ...modelAttributes })
 	}
 
 	#buildResponse() {
