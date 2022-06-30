@@ -1,11 +1,12 @@
 import ApplicationService from "@/services/application-service"
 import db from "@/models"
+import RentalAndTenancyDisputeSubmissionProcessor from "@/processors/rental-and-tenancy-dispute-submission-processor"
 
 export default class RentalAndTenancyDisputeSubmissionsService extends ApplicationService {
 	perform() {
 		return Promise.resolve(this.rawSubmission)
 			.then(this.#saveRawSubmission)
-			.then(this.#transformFormSubmission)
+			.then(this.#parseRawSubmission)
 			.then(this.#createFormSubmission)
 			.then(this.#buildResponse)
 	}
@@ -18,30 +19,13 @@ export default class RentalAndTenancyDisputeSubmissionsService extends Applicati
 		})
 	}
 
-	#transformFormSubmission(submission) {
+	#parseRawSubmission(submission) {
 		const { data } = JSON.parse(submission.rawSubmission)
 
-		const formIdentifier = data["form_identifier"]
-		const firstName = data["first_name"]
-		const lastName = data["last_name"]
-
-		const email = data["email"]
-		const phone = data["phone"]
-		const dateOfBirth = data["date_of_birth"].split("T")[0]
-		const applicantType = data["i_am_a"]
-		const detailsOfDispute = data["details_of_dispute"]
-		const hasAcceptedPolicy = data["check1"] === "1" ? true : false
+		const parsedData = RentalAndTenancyDisputeSubmissionProcessor.perform(data)
 
 		return {
-			formIdentifier,
-			applicantType,
-			dateOfBirth,
-			detailsOfDispute,
-			email,
-			firstName,
-			hasAcceptedPolicy,
-			lastName,
-			phone,
+			...parsedData,
 			submissionId: submission.id,
 		}
 	}
