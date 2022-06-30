@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
 			email: DataTypes.STRING,
 			phone: DataTypes.STRING,
 			dateOfBirth: DataTypes.DATEONLY,
-			applicationType: DataTypes.STRING,
+			applicantType: DataTypes.STRING,
 			detailsOfDispute: DataTypes.TEXT,
 			hasAcceptedPolicy: DataTypes.BOOLEAN,
 		},
