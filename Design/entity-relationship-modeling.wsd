@@ -1,10 +1,20 @@
 @startuml
-' It will be important to link a submission with a schema
-' as schemas will change and the meaning of options will change
+' It is be important to link a submission with a schema
+' as schemas will change over time and the meaning of submission
+' options might be lost
+entity schemas {
+	*id : number <<generated>>
+	--
+	*slug : string
+	*version : string
+	*raw_schema : text
+}
+
 entity submissions {
 	*id : number <<generated>>
 	--
 	*schema_id : number <<foreign_key>>
+	*slug : string
 	*raw_submission : text
 }
 
@@ -38,7 +48,8 @@ entity rental_and_tenancy_dispute_type_options {
 	* text : string
 }
 
-submissions::id ||--|| rental_and_tenancy_dispute_submissions::submission_id
+schemas::id |o--|| submissions::schema_id
+submissions::id |o--|| rental_and_tenancy_dispute_submissions::submission_id
 rental_and_tenancy_dispute_submissions::id }o--|| rental_and_tenancy_dispute_types::rental_and_tenancy_dispute_submission_id
 rental_and_tenancy_dispute_type_options }o--|| rental_and_tenancy_dispute_types::rental_and_tenancy_dispute_type_option_id
 
