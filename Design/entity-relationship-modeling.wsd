@@ -1,0 +1,45 @@
+@startuml
+' It will be important to link a submission with a schema
+' as schemas will change and the meaning of options will change
+entity submissions {
+	*id : number <<generated>>
+	--
+	*schema_id : number <<foreign_key>>
+	*raw_submission : text
+}
+
+entity rental_and_tenancy_dispute_submissions {
+	*id : number <<generated>>
+	--
+	*submission_id : number <<foreign_key>>
+	*form_identifier : string
+	*first_name : string
+	*last_name : string
+	--
+	email : string
+	phone : string
+	date_of_birth : date only
+	applicant_type : string
+	details_of_dispute : text
+	has_accepted_policy : boolean
+}
+
+entity rental_and_tenancy_dispute_types {
+	*id : number <<generated>>
+	--
+	* rental_and_tenancy_dispute_submission_id : number <<foreign_key>>
+	* rental_and_tenancy_dispute_type_option_id : number <<foreign_key>>
+}
+
+entity rental_and_tenancy_dispute_type_options {
+	*id : number <<generated>>
+	--
+	* value : number
+	* text : string
+}
+
+submissions::id ||--|| rental_and_tenancy_dispute_submissions::submission_id
+rental_and_tenancy_dispute_submissions::id }o--|| rental_and_tenancy_dispute_types::rental_and_tenancy_dispute_submission_id
+rental_and_tenancy_dispute_type_options }o--|| rental_and_tenancy_dispute_types::rental_and_tenancy_dispute_type_option_id
+
+@enduml
