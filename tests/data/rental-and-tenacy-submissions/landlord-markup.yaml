@@ -1,0 +1,156 @@
+startpage:
+  '#type': wizard_page
+  '#title': 'Start page'
+  '#next_button_label': 'Start an application'
+  start_description:
+    '#type': markup
+    '#markup': |
+      <h2>Before you start</h2>
+
+      <p>You need:</p>
+
+      <ul>
+      	<li>Item 1;</li>
+      	<li>Item 2;</li>
+      	<li>Item 3.</li>
+      </ul>
+
+      <h4>Other ways to apply</h4>
+
+      <p>[Include link to PDF (printable) version, or someone to call]</p>
+
+      <hr />
+      <h5>A note about privacy</h5>
+
+      <p><small>[insert ATIPP disclaimer here]</small></p>
+form_identifier:
+  '#type': hidden
+  '#title': 'Form identifier'
+  '#default_value': YK-dev-000001.00001
+  '#prepopulate': true
+step1:
+  '#type': wizard_page
+  '#title': Step1
+  date:
+    '#type': date
+    '#title': 'Today''s date'
+    '#title_display': invisible
+    '#description_display': invisible
+    '#disabled': true
+    '#prepopulate': true
+    '#default_value': today
+    '#date_date_format': ''
+  applicant_information:
+    '#type': markup
+    '#markup': |
+      <h2>Applicant information</h2>
+      Enter information about the person who is applying for dispute resolution.
+  applicant_info:
+    '#type': fieldset
+    '#title': 'Personal information'
+    i_am_a:
+      '#type': radios
+      '#title': 'I am a:'
+      '#options':
+        landlord: Landlord
+        tenant: Tenant
+    flexbox_02:
+      '#type': flexbox
+      first_name:
+        '#type': textfield
+        '#title': 'First name'
+      last_name:
+        '#type': textfield
+        '#title': 'Last name'
+    flexbox_04:
+      '#type': flexbox
+      phone:
+        '#type': textfield
+        '#title': 'Phone number'
+        '#description': 'We may need to phone you in order to verify details.'
+        '#size': 25
+        '#input_mask': '(999) 999-9999'
+      email:
+        '#type': textfield
+        '#title': 'Email address'
+        '#description': 'A confirmation message will be sent to this email address after your application is received.'
+        '#input_mask': '''alias'': ''email'''
+    date_of_birth:
+      '#type': datelist
+      '#title': 'Date of birth'
+      '#date_part_order':
+        - month
+        - day
+        - year
+      '#date_year_range': '-120:+1'
+      '#date_year_range_reverse': true
+step2:
+  '#type': wizard_page
+  '#title': Step2
+  title_page2:
+    '#type': markup
+    '#markup': '<h3>Information about the dispute</h3>'
+  check_dispute:
+    '#type': checkboxes
+    '#title': 'What is the nature of this dispute?'
+    '#options':
+      1: 'Unpaid rent'
+      2: 'Security deposit'
+      3: 'Repairs not complete'
+      4: 'Request for an order of possession'
+      5: 'Breach of tenancy agreement'
+      6: 'Unpaid utilities'
+      7: 'Rental increase not in compliance with RLTA'
+      8: 'Abandoned property'
+    '#attributes':
+      style: 'padding-top:10px;'
+  details_of_dispute:
+    '#type': textarea
+    '#attributes':
+      style: 'padding-top:10px;'
+    '#title': 'Details of dispute'
+    '#description': 'You must explain why you are applying for dispute resolution and provide a clear written description of all the issues that are relevant to your dispute. Applications that include monetary issues such as unpaid rent or damages must include a list of items claimed, their individual dollar amounts and the total amount for the claim. If necessary, attach a separate sheet. If you do not raise an issue prior to the hearing, it may not be considered.'
+    '#description_display': before
+  attach_supporting_documentation:
+    '#type': managed_file
+    '#title': 'Attach supporting documentation'
+    '#wrapper_attributes':
+      style: 'padding-top:20px;'
+    '#max_filesize': '10'
+    '#sanitize': true
+  attach_more_supporting_documentation:
+    '#type': managed_file
+    '#title': 'Attach more supporting documentation'
+    '#wrapper_attributes':
+      style: 'padding-top:20px;'
+    '#max_filesize': '10'
+    '#sanitize': true
+before_you_continue:
+  '#type': wizard_page
+  '#title': 'Before you continue'
+  header_before_you_continue:
+    '#type': markup
+    '#markup': |
+      <h2>Before you continue</h2>
+      You must agree to the following declarations as a legal representative of this business.
+  check1:
+    '#type': checkbox
+    '#title': 'Declaration goes here'
+    '#required': true
+actions:
+  '#type': webform_actions
+  '#title': 'Submit button(s)'
+  '#submit__label': 'Finish and submit'
+  '#submit__attributes':
+    class:
+      - btn-primary
+  '#wizard_prev__label': 'Go back a step'
+  '#wizard_next__label': 'Continue to next step'
+  '#wizard_next__attributes':
+    class:
+      - btn-primary
+  '#preview_prev__label': 'Go back a step'
+  '#preview_next__label': 'Go to final step'
+  '#preview_next__attributes':
+    class:
+      - btn-primary
