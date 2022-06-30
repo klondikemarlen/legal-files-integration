@@ -34,9 +34,10 @@ export const PROCESSORS = Object.freeze({
 	// 	key: "createdAt",
 	// 	transformer: () => DateTime.now(), // generated on record creation.
 	// },
-	// check_dispute: {
-	// 	transformer: (v) => v, // reference to join table as multiple values possible
-	// },
+	check_dispute: {
+		key: "disputeTypeOptionValues",
+		transformer: (values) => values.map((v) => parseInt(v, 10)),
+	},
 	details_of_dispute: {
 		key: "detailsOfDispute",
 		transformer: (v) => v,

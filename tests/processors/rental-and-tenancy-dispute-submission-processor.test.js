@@ -14,7 +14,7 @@ describe("RentalAndTenancyDisputeSubmissionProcessor", () => {
 			it("transforms the data", () => {
 				expect(
 					RentalAndTenancyDisputeSubmissionProcessor.perform($data)
-				).to.include({
+				).to.deep.include({
 					formIdentifier: "YK-dev-000001.00001",
 					email: "test@test.com",
 					firstName: "John",
@@ -31,6 +31,7 @@ describe("RentalAndTenancyDisputeSubmissionProcessor", () => {
 						"philosophorum dare. Est enim tanti philosophi tamque nobilis " +
 						"audacter sua decreta defendere.",
 					hasAcceptedPolicy: true,
+					disputeTypeOptionValues: [1, 5, 8],
 				})
 			})
 		})
