@@ -50,6 +50,13 @@ describe("RentalAndTenancyDisputeSubmissionsService", () => {
 					}
 				)
 			})
+
+			it("adds three RentalAndTenancyDisputeType records", async () => {
+				expect(await db.RentalAndTenancyDisputeType.count()).to.equal(0)
+
+				await RentalAndTenancyDisputeSubmissionsService.perform($data)
+				expect(await db.RentalAndTenancyDisputeType.count()).to.equal(3)
+			})
 		})
 	})
 })
