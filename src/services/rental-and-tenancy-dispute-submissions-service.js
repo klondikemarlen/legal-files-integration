@@ -1,7 +1,7 @@
 import ApplicationService from "@/services/application-service"
 import db from "@/models"
 
-export default class RentalAndTenancySubmissionsService extends ApplicationService {
+export default class RentalAndTenancyDisputeSubmissionsService extends ApplicationService {
 	perform() {
 		return Promise.resolve(this.rawSubmission)
 			.then(this.#saveRawSubmission)

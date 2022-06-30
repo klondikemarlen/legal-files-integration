@@ -1,7 +1,7 @@
-import RentalAndTenancySubmissionsService from "@/services/rental-and-tenancy-submissions-service"
+import RentalAndTenancyDisputeSubmissionsService from "@/services/rental-and-tenancy-dispute-submissions-service"
 import db from "@/models"
 
-describe("RentalAndTenancySubmissionsService", () => {
+describe("RentalAndTenancyDisputeSubmissionsService", () => {
 	describe("#perform", () => {
 		context("when passed some form data", () => {
 			def("data", () =>
@@ -10,7 +10,7 @@ describe("RentalAndTenancySubmissionsService", () => {
 
 			it("stores the raw submission", () => {
 				expect(() =>
-					RentalAndTenancySubmissionsService.perform($data)
+					RentalAndTenancyDisputeSubmissionsService.perform($data)
 				).to.alter(() => db.Submission.count(), {
 					by: 1,
 				})
