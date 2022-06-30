@@ -25,14 +25,32 @@ export default class RentalAndTenancyDisputeSubmissionsService extends Applicati
 		const firstName = data["first_name"]
 		const lastName = data["last_name"]
 
-		return { formIdentifier, firstName, lastName, submissionId: submission.id }
+		const email = data["email"]
+		const phone = data["phone"]
+		const dateOfBirth = data["date_of_birth"].split("T")[0]
+		const applicantType = data["i_am_a"]
+		const detailsOfDispute = data["details_of_dispute"]
+		const hasAcceptedPolicy = data["check1"] === "1" ? true : false
+
+		return {
+			formIdentifier,
+			applicantType,
+			dateOfBirth,
+			detailsOfDispute,
+			email,
+			firstName,
+			hasAcceptedPolicy,
+			lastName,
+			phone,
+			submissionId: submission.id,
+		}
 	}
 
 	#createFormSubmission(modelData) {
 		return db.RentalAndTenancyDisputeSubmission.create({ ...modelData })
 	}
 
-	#buildResponse() {
-		return { success: true }
+	#buildResponse(parsedSubmission) {
+		return { data: parsedSubmission.toJSON() }
 	}
 }

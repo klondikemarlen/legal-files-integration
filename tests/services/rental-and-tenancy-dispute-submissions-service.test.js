@@ -21,6 +21,31 @@ describe("RentalAndTenancyDisputeSubmissionsService", () => {
 				await RentalAndTenancyDisputeSubmissionsService.perform($data)
 				expect(await db.RentalAndTenancyDisputeSubmission.count()).to.equal(1)
 			})
+
+			it("creates an RentalAndTenancyDisputeSubmission with all the basic properties", async () => {
+				return RentalAndTenancyDisputeSubmissionsService.perform($data).then(
+					(result) => {
+						return expect(result.data).to.include({
+							formIdentifier: "YK-dev-000001.00001",
+							email: "test@test.com",
+							firstName: "John",
+							lastName: "McCartney",
+							phone: "(123) 456-7890",
+							dateOfBirth: "1969-12-31",
+							applicantType: "landlord",
+							detailsOfDispute:
+								"Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+								"Negat esse eam, inquit, propter se expetendam. Primum Theophrasti, " +
+								"Strato, physicum se voluit; Id mihi magnum videtur. Itaque mihi " +
+								"non satis videmini considerare quod iter sit naturae quaeque " +
+								"progressio. Quare hoc videndum est, possitne nobis hoc ratio " +
+								"philosophorum dare. Est enim tanti philosophi tamque nobilis " +
+								"audacter sua decreta defendere.",
+							hasAcceptedPolicy: true,
+						})
+					}
+				)
+			})
 		})
 	})
 })
