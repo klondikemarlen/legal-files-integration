@@ -14,6 +14,12 @@ describe("RentalAndTenancyDisputeSubmissionsService", () => {
 				await RentalAndTenancyDisputeSubmissionsService.perform($data)
 				expect(await db.Submission.count()).to.equal(1)
 			})
+
+			it("creates a RentalAndTenancyDisputeSubmission", async () => {
+				expect(await db.RentalAndTenancyDisputeSubmission.count()).to.equal(0)
+
+				await RentalAndTenancyDisputeSubmissionsService.perform($data)
+				expect(await db.RentalAndTenancyDisputeSubmission.count()).to.equal(1)
 			})
 		})
 	})

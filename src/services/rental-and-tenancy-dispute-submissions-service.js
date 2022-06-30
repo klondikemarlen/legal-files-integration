@@ -18,12 +18,18 @@ export default class RentalAndTenancyDisputeSubmissionsService extends Applicati
 		})
 	}
 
-	#transformFormSubmission(rawSubmission) {
-		return rawSubmission
+	#transformFormSubmission(submission) {
+		const { data } = JSON.parse(submission.rawSubmission)
+
+		const formIdentifier = data["form_identifier"]
+		const firstName = data["first_name"]
+		const lastName = data["last_name"]
+
+		return { formIdentifier, firstName, lastName, submissionId: submission.id }
 	}
 
 	#createFormSubmission(modelData) {
-		return db.FormA.create({ ...modelData })
+		return db.RentalAndTenancyDisputeSubmission.create({ ...modelData })
 	}
 
 	#buildResponse() {
