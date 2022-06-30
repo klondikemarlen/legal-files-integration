@@ -1,5 +1,6 @@
 "use strict"
 const { Model } = require("sequelize")
+
 module.exports = (sequelize, DataTypes) => {
 	class Submission extends Model {
 		/**
@@ -13,11 +14,15 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Submission.init(
 		{
-			rawSubmission: DataTypes.TEXT,
+			rawSubmission: {
+				type: DataTypes.TEXT,
+				allowNull: false,
+			},
 		},
 		{
 			sequelize,
 			modelName: "Submission",
+			tableName: "submissions",
 		}
 	)
 	return Submission
