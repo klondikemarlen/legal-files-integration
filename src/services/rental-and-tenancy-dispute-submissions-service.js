@@ -13,7 +13,9 @@ export default class RentalAndTenancyDisputeSubmissionsService extends Applicati
 	// private methods
 
 	#saveRawSubmission(rawSubmission) {
-		return db.Submission.create({ rawSubmission })
+		return db.Submission.create({
+			rawSubmission: JSON.stringify(rawSubmission),
+		})
 	}
 
 	#transformFormSubmission(rawSubmission) {
