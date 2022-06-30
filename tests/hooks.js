@@ -2,16 +2,22 @@ const td = require("testdouble")
 
 import db from "@/models"
 
+function destroyAll(model) {
+	return model
+		.findAll()
+		.then((instances) => {
+			return Promise.all(instances.map((instance) => instance.destroy()))
+		})
+		.catch((error) => console.error(error))
+}
+
 // Sloooow, but avoids foreign key constraint issues.
-function truncateAllTables() {
+async function destroyAllOnAllTables() {
+	await destroyAll(db.RentalAndTenancyDisputeSubmission)
+
 	return Promise.all(
 		Object.values(db.sequelize.models).map((model) => {
-			return model
-				.findAll()
-				.then((instances) => {
-					return Promise.all(instances.map((instance) => instance.destroy()))
-				})
-				.catch((error) => console.error(error))
+			return destroyAll(model)
 		})
 	)
 }
@@ -19,7 +25,7 @@ function truncateAllTables() {
 // reset testdouble mocks after each test.
 exports.mochaHooks = {
 	beforeEach() {
-		return truncateAllTables()
+		return destroyAllOnAllTables()
 	},
 	afterEach(done) {
 		td.reset()
