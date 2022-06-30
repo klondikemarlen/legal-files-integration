@@ -1,24 +1,28 @@
+const databaseOptions = {
+	username: process.env.DB_USER,
+	password: process.env.DB_PASSWORD,
+	database: process.env.DB_NAME,
+	host: process.env.DB_HOST,
+	dialect: "mssql",
+}
+
+const modelOptions = {
+	underscored: true,
+	timestamps: true,
+}
+
 module.exports = {
 	development: {
-		username: process.env.DB_USER,
-		password: process.env.DB_PASSWORD,
-		database: process.env.DB_NAME,
-		host: process.env.DB_HOST,
-		dialect: "mssql",
+		...databaseOptions,
+		define: modelOptions,
 	},
 	test: {
-		username: process.env.DB_USER,
-		password: process.env.DB_PASSWORD,
-		database: process.env.DB_NAME,
-		host: process.env.DB_HOST,
-		dialect: "mssql",
+		...databaseOptions,
 		logging: false, // Disables logging
+		define: modelOptions,
 	},
 	production: {
-		username: process.env.DB_USER,
-		password: process.env.DB_PASSWORD,
-		database: process.env.DB_NAME,
-		host: process.env.DB_HOST,
-		dialect: "mssql",
+		...databaseOptions,
+		define: modelOptions,
 	},
 }
