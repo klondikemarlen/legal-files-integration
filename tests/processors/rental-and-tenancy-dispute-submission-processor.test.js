@@ -6,9 +6,9 @@ describe("RentalAndTenancyDisputeSubmissionProcessor", () => {
 			def(
 				"data",
 				() =>
-					loadTestData("rental-and-tenacy-submissions/submission-1.json")[
-						"data"
-					]
+					loadTestData(
+						"rental-and-tenancy-dispute-submissions/submission-1.json"
+					)["data"]
 			)
 
 			it("transforms the data", () => {

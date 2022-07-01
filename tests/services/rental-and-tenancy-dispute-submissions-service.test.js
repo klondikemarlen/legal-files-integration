@@ -5,7 +5,7 @@ describe("RentalAndTenancyDisputeSubmissionsService", () => {
 	describe("#perform", () => {
 		context("when passed some form data", () => {
 			def("data", () =>
-				loadTestData("rental-and-tenacy-submissions/submission-1.json")
+				loadTestData("rental-and-tenancy-dispute-submissions/submission-1.json")
 			)
 
 			def("disputeTypeOptionFields", () => [
