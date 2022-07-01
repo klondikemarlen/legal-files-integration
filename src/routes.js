@@ -1,10 +1,13 @@
-import { Router } from "express"
+import express from "express"
 
 import formAController from "@/controllers/form-a-controller"
 
-const router = Router()
+const router = express.Router()
 
-router.route("/form-a").post(formAController.postInjestForm)
+// API middlewares
+// See https://expressjs.com/en/api.html#req.body
+router.use("/api", express.json()) // for parsing application/json
+router.use("/api", express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 // Return list of routes.
 router.get("/", (req, res) => {
@@ -19,5 +22,7 @@ router.get("/", (req, res) => {
 
 	res.send("Legal Files Integration API Routes<br><br>" + data.join("<br>"))
 })
+// API form routes
+router.route("/api/forms/form-a").post(formAController.postInjestForm)
 
 export default router
