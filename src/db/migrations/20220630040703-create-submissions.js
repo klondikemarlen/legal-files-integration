@@ -1,21 +1,16 @@
 "use strict"
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable("form_as", {
+		await queryInterface.createTable("submissions", {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			first_name: {
-				type: Sequelize.STRING,
-			},
-			last_name: {
-				type: Sequelize.STRING,
-			},
-			email: {
-				type: Sequelize.STRING,
+			raw_submission: {
+				type: Sequelize.TEXT,
+				allowNull: false,
 			},
 			created_at: {
 				allowNull: false,
@@ -28,6 +23,6 @@ module.exports = {
 		})
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("form_as")
+		await queryInterface.dropTable("submissions")
 	},
 }

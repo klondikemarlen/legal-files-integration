@@ -2,7 +2,7 @@
 const { Model } = require("sequelize")
 
 module.exports = (sequelize, DataTypes) => {
-	class FormA extends Model {
+	class Submission extends Model {
 		/**
 		 * Helper method for defining associations.
 		 * This method is not a part of Sequelize lifecycle.
@@ -10,19 +10,23 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
+			this.hasOne(models.rentalAndTenancyDisputeSubmission, {
+				onDelete: "cascade",
+			})
 		}
 	}
-	FormA.init(
+	Submission.init(
 		{
-			firstName: DataTypes.STRING,
-			lastName: DataTypes.STRING,
-			email: DataTypes.STRING,
+			rawSubmission: {
+				type: DataTypes.TEXT,
+				allowNull: false,
+			},
 		},
 		{
 			sequelize,
-			modelName: "formA",
-			tableName: "form_as",
+			modelName: "submission",
+			tableName: "submissions",
 		}
 	)
-	return FormA
+	return Submission
 }

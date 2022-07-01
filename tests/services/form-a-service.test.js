@@ -1,7 +1,7 @@
 import FormAService from "@/services/form-a-service"
 import db from "@/models"
 
-describe("FormApiService", () => {
+describe("FormAService", () => {
 	describe("#perform", () => {
 		context("when passed some form data", () => {
 			def("data", () => ({
@@ -14,13 +14,11 @@ describe("FormApiService", () => {
 				})
 			})
 
-			it("error stores the data in the database", () => {
-				expect(() => FormAService.perform($data)).to.alter(
-					() => db.FormA.count(),
-					{
-						by: 1,
-					}
-				)
+			it("error stores the data in the database", async () => {
+				expect(await db.formA.count()).to.equal(0)
+
+				await FormAService.perform($data)
+				expect(await db.formA.count()).to.equal(1)
 			})
 		})
 	})
