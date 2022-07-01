@@ -11,10 +11,12 @@ function destroyAll(model) {
 		.catch((error) => console.error(error))
 }
 
-// Sloooow, but avoids foreign key constraint issues.
 async function destroyAllOnAllTables() {
-	await destroyAll(db.rentalAndTenancyDisputeType)
-	await destroyAll(db.rentalAndTenancyDisputeSubmission)
+	// Manually specify order if you run into Foregn Key issues.
+	// If you set up your relationships properly
+	// it should "just work"(tm)
+	// await destroyAll(db.rentalAndTenancyDisputeType)
+	// await destroyAll(db.rentalAndTenancyDisputeSubmission)
 
 	return Promise.all(
 		Object.values(db.sequelize.models).map((model) => {
@@ -26,6 +28,9 @@ async function destroyAllOnAllTables() {
 // reset testdouble mocks after each test.
 exports.mochaHooks = {
 	beforeEach() {
+		// You'd think this would be very slow, but db.sequelize.sync({ force: true }) is slower
+		// db.sequelize.truncate() in theory would be the best,
+		// but it has foreign key constraint issues.
 		return destroyAllOnAllTables()
 	},
 	afterEach(done) {
