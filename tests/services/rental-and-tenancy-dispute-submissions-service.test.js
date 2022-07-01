@@ -8,6 +8,17 @@ describe("RentalAndTenancyDisputeSubmissionsService", () => {
 				loadTestData("rental-and-tenacy-submissions/submission-1.json")
 			)
 
+			def("disputeTypeOptionFields", () => [
+				{ value: "1", text: "Unpaid rent" },
+				{ value: "2", text: "Security deposit" },
+				{ value: "3", text: "Repairs not complete" },
+				{ value: "4", text: "Request for an order of possession" },
+				{ value: "5", text: "Breach of tenancy agreement" },
+				{ value: "6", text: "Unpaid utilities" },
+				{ value: "7", text: "Rental increase not in compliance with RLTA" },
+				{ value: "8", text: "Abandoned property" },
+			])
+
 			it("stores the raw submission", async () => {
 				expect(await db.Submission.count()).to.equal(0)
 
@@ -52,6 +63,11 @@ describe("RentalAndTenancyDisputeSubmissionsService", () => {
 			})
 
 			it("adds three RentalAndTenancyDisputeType records", async () => {
+				await db.RentalAndTenancyDisputeTypeOption.bulkCreate(
+					$disputeTypeOptionFields,
+					{ validate: true }
+				)
+
 				expect(await db.RentalAndTenancyDisputeType.count()).to.equal(0)
 
 				await RentalAndTenancyDisputeSubmissionsService.perform($data)

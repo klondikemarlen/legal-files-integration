@@ -13,6 +13,7 @@ function destroyAll(model) {
 
 // Sloooow, but avoids foreign key constraint issues.
 async function destroyAllOnAllTables() {
+	await destroyAll(db.RentalAndTenancyDisputeType)
 	await destroyAll(db.RentalAndTenancyDisputeSubmission)
 
 	return Promise.all(

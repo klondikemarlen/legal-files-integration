@@ -10,6 +10,16 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			// define association here
 			models.RentalAndTenancyDisputeSubmission.belongsTo(models.Submission, {})
+			this.hasMany(models.RentalAndTenancyDisputeType, {
+				onDelete: "cascade",
+			})
+			this.belongsToMany(
+				models.RentalAndTenancyDisputeTypeOption,
+				{
+					through: models.RentalAndTenancyDisputeType,
+				},
+				{ onDelete: "set null" }
+			)
 		}
 	}
 	RentalAndTenancyDisputeSubmission.init(
