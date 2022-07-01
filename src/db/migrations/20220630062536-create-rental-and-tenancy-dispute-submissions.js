@@ -15,6 +15,8 @@ module.exports = {
 					model: "submissions",
 					key: "id",
 				},
+				onUpdate: "cascade",
+				onDelete: "cascade",
 			},
 			form_identifier: {
 				type: Sequelize.STRING,

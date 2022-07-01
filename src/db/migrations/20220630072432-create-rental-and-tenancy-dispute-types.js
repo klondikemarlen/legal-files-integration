@@ -15,6 +15,8 @@ module.exports = {
 					model: "rental_and_tenancy_dispute_submissions",
 					key: "id",
 				},
+				onUpdate: "cascade",
+				onDelete: "cascade",
 			},
 			rental_and_tenancy_dispute_type_option_id: {
 				type: Sequelize.INTEGER,
@@ -23,6 +25,8 @@ module.exports = {
 					model: "rental_and_tenancy_dispute_type_options",
 					key: "id",
 				},
+				onUpdate: "cascade",
+				onDelete: "cascade",
 			},
 			created_at: {
 				allowNull: false,
