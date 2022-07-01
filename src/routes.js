@@ -1,6 +1,7 @@
 import express from "express"
 
 import formAController from "@/controllers/form-a-controller"
+import rentalAndTenancyDisputeSubmissionsController from "@/controllers/rental-and-tenancy-dispute-submissions-controller"
 
 const router = express.Router()
 
@@ -11,5 +12,8 @@ router.use("/api", express.urlencoded({ extended: true })) // for parsing applic
 
 // API form routes
 router.route("/api/forms/form-a").post(formAController.postInjestForm)
+router
+	.route("/api/forms/rental-and-tenancy-dispute")
+	.post(rentalAndTenancyDisputeSubmissionsController.postInjestForm)
 
 export default router
