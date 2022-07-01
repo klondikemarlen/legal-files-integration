@@ -12,25 +12,39 @@ document.
 
 ## Repository Layout
 
+### Core files and folders
+
 - [server.js](server.js) - app entrypoint
-- [babel.config.json](babel.config.json) - Babel config for JS enhancemens and
-  compatability
-- [.prettierrc.yaml](.prettierrc.yaml) - Prettier config for code
-  auto-formatting.
-- [.eslintrc.json](.eslintrc.json) - Eslint config for code quality and linting.
-- [.sequelizerc](.sequelizerc) - Sequelize config file for migrations and seeds
+- [bin/entrypoint.sh](bin/entrypoint.sh) - runs database setup and migration and
+  seeding on app boot.
+- [bin/dev](bin/dev) - `dev` helper command for working with Docker Compose.
+- [Design](Design) - entity relationship modeling and documentation for external
+  contractors.
+
+### Source folder layout
+
 - [src/](src/) - Express server source code
-- [src/api](src/api/) - code for talking to the LegalFiles API.
-- [src/controllers](src/controllers/) - code to receive Drupal form data and
+- [src/api/](src/api/) - (future) code for talking to the LegalFiles API.
+- [src/controllers/](src/controllers/) - code to receive Drupal form data and
   pass it off to a service. Controllers should limit themselves to calling
   services and returning a response to the Drupal form.
-- [src/services](src/services/) - code to transform Drupal form data and call
+- [src/db/](src/db/) - Sequelize database migrations, seeders, and config.
+- [src/db/migrations/](src/db/migrations/) - Sequelize database migration files.
+- [src/db/seeders/](src/db/seeders/) - Sequelize database seeding files.
+- [src/db/config.js](src/db/config.js) - Sequelize config file for database
+  connections.
+- [src/models/](src/models/) - Sequelize database models.
+- [src/processors/](src/processors/) - Models and lambdas for raw data to
+  mapping model attributes.
+- [src/services/](src/services/) - code to transform Drupal form data and call
   API functions. Services should be thoroughly tested as the bulk of the
   application logic occurs in them.
+- [src/utils/](src/utils/) - Small helper functions.
 - [src/app.js](src/app.js) - core app logic
+- [src/models.js](src/models.js) - Logic for loading the Sequelize database and
+  all models.
 - [src/routes.js](src/routes.js) - routes that accept form data. Routes are
   mapped to controller methods.
-- [src/db/config.js](src/db/config.js) - Config file for database connections.
 
 ### Production
 
@@ -50,15 +64,25 @@ document.
 - .env.development - development environment config, _never_ commit this file.
 - [nodemon.config.json](nodemon.config.json) - Nodemon config for developement
   code reloading.
-- [.sequelizerc](.sequelizerc) - customize sequelize-cli options
+- [babel.config.json](babel.config.json) - Babel config for JS enhancemens and
+  compatability
+- [.prettierrc.yaml](.prettierrc.yaml) - Prettier config for code
+  auto-formatting.
+- [.eslintrc.json](.eslintrc.json) - Eslint config for code quality and linting.
+- [.sequelizerc](.sequelizerc) - sequelize-cli config file for migrations and
+  seeds
 
 #### Test
 
 - [.mocharc.js](.mocharc.js) - mocha configuration file
-- [tests/test-setup.js](tests/test-setup.js) - test setup file, loads Chai and
-  various other test
 - [tests/](tests/) - test folder, test files must follow the format
   `tests/**/*.test.js` plugins
+- [tests/test-setup.js](tests/test-setup.js) - test setup file, loads Chai and
+  various other test
+- [tests/helpers.js](tests/helpers.js) - test helpers. e.g. for loading test
+  data from json
+- [tests/hooks.js](tests/hooks.js) - global test hooks. e.g. for cleaning the
+  database before each test
 
 ## Development Setup
 
@@ -107,7 +131,7 @@ Then run `direnv allow`
 
 Using Sequelize, see https://sequelize.org/docs/v6/other-topics/migrations/
 
-Inside container the "app" container.
+Inside container the "app" container - `dev bash`.
 
 1. `npx sequelize-cli db:create`
 2. `npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string`
@@ -121,6 +145,19 @@ To create and run seeds:
 
 - `npx sequelize-cli seed:generate --name demo-user`
 - `npx sequelize-cli db:seed:all`
+
+> If you are on Linux, you will need to take ownership of the files after
+> creating them inside a docker container. Run
+> `sudo chown -R $UID:$(id -g) <file-or-directory>` outside of the container.
+> The following helper will make your life much easier:
+
+```bash
+ownit () {
+    local file_or_directory="${1:-.}"
+    echo "Take ownership of the file or directory? ${file_or_directory}"
+    sudo chown -R $UID:$(id -g) "$file_or_directory"
+}
+```
 
 ### Testing
 
