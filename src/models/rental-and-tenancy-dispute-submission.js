@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
-			this.belongsTo(models.Submission, {})
-			this.hasMany(models.RentalAndTenancyDisputeType, {
+			this.belongsTo(models.submission)
+			this.hasMany(models.rentalAndTenancyDisputeType, {
 				onDelete: "cascade",
 			})
 			this.belongsToMany(
-				models.RentalAndTenancyDisputeTypeOption,
+				models.rentalAndTenancyDisputeTypeOption,
 				{
-					through: models.RentalAndTenancyDisputeType,
+					through: models.rentalAndTenancyDisputeType,
 				},
 				{ onDelete: "set null" }
 			)
@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	RentalAndTenancyDisputeSubmission.init(
 		{
-			submissionId: DataTypes.INTEGER,
 			formIdentifier: DataTypes.STRING,
 			firstName: DataTypes.STRING,
 			lastName: DataTypes.STRING,
@@ -37,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		{
 			sequelize,
+			modelName: "rentalAndTenancyDisputeSubmission",
 			tableName: "rental_and_tenancy_dispute_submissions",
 		}
 	)

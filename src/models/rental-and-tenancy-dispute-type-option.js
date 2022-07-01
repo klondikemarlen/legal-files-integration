@@ -8,13 +8,13 @@ module.exports = (sequelize, DataTypes) => {
 		 * The `models/index` file will call this method automatically.
 		 */
 		static associate(models) {
-			this.hasMany(models.RentalAndTenancyDisputeType, {
+			this.hasMany(models.rentalAndTenancyDisputeType, {
 				onDelete: "cascade",
 			})
 			this.belongsToMany(
-				models.RentalAndTenancyDisputeSubmission,
+				models.rentalAndTenancyDisputeSubmission,
 				{
-					through: models.RentalAndTenancyDisputeType,
+					through: models.rentalAndTenancyDisputeType,
 				},
 				{ onDelete: "set null" }
 			)
@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		{
 			sequelize,
+			modelName: "rentalAndTenancyDisputeTypeOption",
 			tableName: "rental_and_tenancy_dispute_type_options",
 		}
 	)

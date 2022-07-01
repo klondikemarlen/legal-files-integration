@@ -11,7 +11,7 @@ export default class FormAService extends ApplicationService {
 	// private methods
 
 	#createFormSubmission(modelAttributes) {
-		return db.FormA.create({ ...modelAttributes })
+		return db.formA.create({ ...modelAttributes })
 	}
 
 	#buildResponse() {

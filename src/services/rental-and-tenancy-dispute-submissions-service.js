@@ -18,7 +18,7 @@ export default class RentalAndTenancyDisputeSubmissionsService extends Applicati
 	// private methods
 
 	#saveRawSubmission(rawSubmission) {
-		return db.Submission.create({
+		return db.submission.create({
 			rawSubmission: JSON.stringify(rawSubmission),
 		})
 	}
@@ -35,12 +35,12 @@ export default class RentalAndTenancyDisputeSubmissionsService extends Applicati
 	}
 
 	#createFormSubmission(modelData) {
-		return db.RentalAndTenancyDisputeSubmission.create({ ...modelData })
+		return db.rentalAndTenancyDisputeSubmission.create({ ...modelData })
 	}
 
 	async #createDisputeTypes(submission, modelData) {
 		const { disputeTypeOptionValues } = modelData
-		const disputeTypes = await db.RentalAndTenancyDisputeTypeOption.findAll({
+		const disputeTypes = await db.rentalAndTenancyDisputeTypeOption.findAll({
 			where: {
 				value: {
 					[db.Sequelize.Op.in]: disputeTypeOptionValues,
@@ -48,14 +48,11 @@ export default class RentalAndTenancyDisputeSubmissionsService extends Applicati
 			},
 			attributes: ["id"],
 		})
-		// Not sure I understand why these are need to be uppercased.
-		// Possibly something around the defaults of tedious (MS SQL driver)?
-		// Might be worth making all names uppercase for sanity.
 		const fields = disputeTypes.map((disputeType) => ({
-			RentalAndTenancyDisputeSubmissionId: submission.id,
-			RentalAndTenancyDisputeTypeOptionId: disputeType.id,
+			rentalAndTenancyDisputeSubmissionId: submission.id,
+			rentalAndTenancyDisputeTypeOptionId: disputeType.id,
 		}))
-		return db.RentalAndTenancyDisputeType.bulkCreate(fields, { validate: true })
+		return db.rentalAndTenancyDisputeType.bulkCreate(fields, { validate: true })
 	}
 
 	#buildResponse() {

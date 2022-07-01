@@ -9,17 +9,22 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
-			this.belongsTo(models.RentalAndTenancyDisputeSubmission)
-			this.belongsTo(models.RentalAndTenancyDisputeTypeOption)
+			this.belongsTo(models.rentalAndTenancyDisputeSubmission)
+			this.belongsTo(models.rentalAndTenancyDisputeTypeOption)
 		}
 	}
 	RentalAndTenancyDisputeType.init(
 		{
-			rentalAndTenancyDisputeSubmissionId: DataTypes.INTEGER,
-			rentalAndTenancyDisputeTypeOptionId: DataTypes.INTEGER,
+			id: {
+				type: DataTypes.INTEGER,
+				primaryKey: true,
+				autoIncrement: true,
+				allowNull: false,
+			},
 		},
 		{
 			sequelize,
+			modelName: "rentalAndTenancyDisputeType",
 			tableName: "rental_and_tenancy_dispute_types",
 		}
 	)

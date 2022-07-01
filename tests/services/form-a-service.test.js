@@ -15,10 +15,10 @@ describe("FormAService", () => {
 			})
 
 			it("error stores the data in the database", async () => {
-				expect(await db.FormA.count()).to.equal(0)
+				expect(await db.formA.count()).to.equal(0)
 
 				await FormAService.perform($data)
-				expect(await db.FormA.count()).to.equal(1)
+				expect(await db.formA.count()).to.equal(1)
 			})
 		})
 	})

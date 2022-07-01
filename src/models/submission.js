@@ -10,11 +10,8 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
-			this.hasOne(models.RentalAndTenancyDisputeSubmission, {
-				// I don't think the cascade works.
-				// It might need to be set at migration time via
-				// queryInterface.addConstraint
-				onDelete: "CASCADE",
+			this.hasOne(models.rentalAndTenancyDisputeSubmission, {
+				onDelete: "cascade",
 			})
 		}
 	}
@@ -27,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		{
 			sequelize,
+			modelName: "submission",
 			tableName: "submissions",
 		}
 	)

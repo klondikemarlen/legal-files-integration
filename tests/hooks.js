@@ -13,8 +13,8 @@ function destroyAll(model) {
 
 // Sloooow, but avoids foreign key constraint issues.
 async function destroyAllOnAllTables() {
-	await destroyAll(db.RentalAndTenancyDisputeType)
-	await destroyAll(db.RentalAndTenancyDisputeSubmission)
+	await destroyAll(db.rentalAndTenancyDisputeType)
+	await destroyAll(db.rentalAndTenancyDisputeSubmission)
 
 	return Promise.all(
 		Object.values(db.sequelize.models).map((model) => {
