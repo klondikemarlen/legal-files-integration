@@ -178,7 +178,7 @@ ownit () {
 
 > Debug the built image via `docker compose run --rm app bash`
 
-## Production Deployment
+## Production Deployment (not currently working)
 
 5. Create a `.env` file in the top-level project directory from the
    `env.template` file.
