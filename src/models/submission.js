@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
-			models.Submission.hasOne(models.RentalAndTenancyDisputeSubmission, {
+			this.hasOne(models.RentalAndTenancyDisputeSubmission, {
 				// I don't think the cascade works.
 				// It might need to be set at migration time via
 				// queryInterface.addConstraint
