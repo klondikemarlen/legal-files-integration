@@ -72,12 +72,12 @@ class DevHelper
   def sqlcmd(*args, **kwargs) # rubocop:disable Metrics/MethodLength
     db_host = ENV.fetch('DB_HOST', 'localhost')
     db_user = ENV.fetch('DB_USER', 'sa')
-    db_pass = ENV.fetch('DB_PASS', '1m5ecure!')
-    db_name = ENV.fetch('DB_NAME', 'legal_files')
+    db_password = ENV.fetch('DB_PASSWORD', '1m5ecure!')
+    db_name = ENV.fetch('DB_NAME', 'legal_files_development')
     compose(
       *%w[exec db /opt/mssql-tools/bin/sqlcmd],
       *%W[-U #{db_user}],
-      *%W[-P #{db_pass}],
+      *%W[-P #{db_password}],
       *%W[-H #{db_host}],
       *%W[-d #{db_name}],
       '-I', # enable quoted identifiers, e.g. "table"."column"
