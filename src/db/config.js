@@ -19,6 +19,10 @@ module.exports = {
 	development: {
 		...databaseOptions,
 		define: modelOptions,
+		// Alternative logging options
+		// logging: console.log,
+		// logQueryParameters: true,
+		// logging: (...msg) => console.log(msg),
 	},
 	test: {
 		...databaseOptions,
