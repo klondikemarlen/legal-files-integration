@@ -55,6 +55,11 @@ document.
   after production build.
 - .env - production environment config, _never_ commit this file.
 
+#### Production - UAT
+
+- [docker-compose.uat.yaml](docker-compose.yaml) - production user acceptance
+  testing Docker Compose
+
 ### Development
 
 - [docker-compose.development.yaml](docker-compose.development.yaml) -
@@ -177,9 +182,13 @@ ownit () {
 
 > Debug the built image via `docker compose run --rm app bash`
 
-## Production Deployment (not currently working)
+## Production Deployment - UAT
 
-5. Create a `.env` file in the top-level project directory from the
+1. Create a `.env` file in the top-level project directory from the
    `env.template` file.
-1. Build the app via `docker compose build`.
-1. Deploy the build app via `docker compose up`
+2. Build the app via `docker compose -f docker-compose.uat.yaml build`.
+3. Deploy the build app via `docker compose -f docker-compose.uat.yaml up`
+
+## Production Deployment
+
+To be determined!
