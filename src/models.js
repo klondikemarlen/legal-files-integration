@@ -1,11 +1,19 @@
 "use strict"
 
-const fs = require("fs")
-const path = require("path")
 const Sequelize = require("sequelize")
-const basename = path.basename(__filename)
+
+const allConfigs = require("./db/config.js")
+
+// Manually requiring models to avoid dynamic import
+// issues when bundling the app.
+const formAFactory = require("./models/form-a")
+const rentalAndTenancyDisputeSubmissionFactory = require("./models/rental-and-tenancy-dispute-submission")
+const rentalAndTenancyDisputeTypeFactory = require("./models/rental-and-tenancy-dispute-type")
+const rentalAndTenancyDisputeTypeOptionFactory = require("./models/rental-and-tenancy-dispute-type-option")
+const submissionFactory = require("./models/submission")
+
 const env = process.env.NODE_ENV || "development"
-const config = require(__dirname + "/db/config.js")[env]
+const config = allConfigs[env]
 const db = {}
 
 let sequelize
@@ -20,19 +28,16 @@ if (config.use_env_variable) {
 	)
 }
 
-fs.readdirSync(path.join(__dirname, "models"))
-	.filter((file) => {
-		return (
-			file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
-		)
-	})
-	.forEach((file) => {
-		const model = require(path.join(__dirname, "models", file))(
-			sequelize,
-			Sequelize.DataTypes
-		)
-		db[model.name] = model
-	})
+;[
+	formAFactory,
+	rentalAndTenancyDisputeSubmissionFactory,
+	rentalAndTenancyDisputeTypeFactory,
+	rentalAndTenancyDisputeTypeOptionFactory,
+	submissionFactory,
+].forEach((modelFactory) => {
+	const model = modelFactory(sequelize, Sequelize.DataTypes)
+	db[model.name] = model
+})
 
 Object.keys(db).forEach((modelName) => {
 	if (db[modelName].associate) {
